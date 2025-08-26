@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Find next Number</title>
+</head>
+<body>
+    <div class="container">
+    <h2>Find Next Number</h2>
+
+    <!-- Scenario 1:- In Array -->
+    <label>Enter Array (comma separated)</label>
+    <input type="text" id="arrayInput" placeholder="e.g. 2,4,6,8,10">
+    
+    <label>Enter Target Number</label>
+    <input type="number" id="targetInput" placeholder="e.g. 6">
+
+    <button onclick="findNextInArray()">Find Next in Array</button>
+
+    <!-- Scenario 2: Single Number -->
+    <label>Enter a Single Number</label>
+    <input type="text" id="singleInput" placeholder="e.g. 5 or 5.5">
+
+    <button onclick="findNextSingle()">Find Next Number</button>
+
+    <div class="result" id="resultBox">Result will appear here...</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
