@@ -1,99 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Tasks Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <h2>📘 Tasks</h2>
-      <button onclick="showTask('task1')">📅 Task 1: Age → Days</button>
-      <button onclick="showTask('task2')">⏰ Task 2: Hours → Sec</button>
-      <button onclick="showTask('task3')">🔢 Task 3: Next Number</button>
-      <button onclick="showTask('task4')">📝 Task 4: Capitalize Name</button>
-      <button onclick="showTask('task5')">⚖️ Task 5: BMI</button>
-      <button onclick="showTask('task6')">🎲 Task 6: Array</button>
-      <button onclick="showTask('task7')">➕ Task 7: Add Boxes</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Tasks Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h2>📘 Tasks</h2>
+        <button onclick="showTask('task1')">📅 Task 1: Age → Days</button>
+        <button onclick="showTask('task2')">⏰ Task 2: Hours → Sec</button>
+        <button onclick="showTask('task3')">🔢 Task 3: Next Number</button>
+        <button onclick="showTask('task4')">📝 Task 4: Capitalize Name</button>
+        <button onclick="showTask('task5')">⚖️ Task 5: BMI</button>
+        <button onclick="showTask('task6')">🎲 Task 6: Array</button>
+        <button onclick="showTask('task7')">➕ Task 7: Add Boxes</button>
+      </div>
+
+      <!-- Main Contents -->
+      <div class="main">
+        <!-- Task 1 -->
+        <div class="task-card" id="task1">
+          <h2>📅 Task 1: Age to Days Converter</h2>
+          <input type="number" id="ageInput" placeholder="Enter age in years" />
+          <button onclick="convertAge()">Convert</button>
+          <p id="ageResult"></p>
+        </div>
+
+        <!-- Task 2: Hours -> Seconds -->
+        <div class="task-card" id="task2">
+          <h2>⏰ Task 2: Hours → Seconds</h2>
+
+          <!-- Accepts decimal like 2.5, comma 2,5 or time "2:30" -->
+          <input
+            type="text"
+            id="hoursInput"
+            placeholder="Enter hours (e.g. 2.5 or 2:30)"
+          />
+          <button id="hoursBtn">Convert</button>
+
+          <p id="hoursResult" class="result"></p>
+        </div>
+
+        <!--task 3-->
+        <div class="task-card" id="task3">
+          <h2>Task 3: Find Next Number</h2>
+
+          <h3>Scenario 1: From User Array</h3>
+          <input
+            type="text"
+            id="userArray"
+            placeholder="Enter numbers separated by commas (e.g. 5,10,15)"
+          />
+          <br /><br />
+          <input
+            type="number"
+            id="arrayInput"
+            placeholder="Enter a number from array"
+          />
+          <button onclick="findNextInUserArray()">Find Next in Array</button>
+          <p id="arrayResult"></p>
+
+          <h3>Scenario 2: Integer/Float</h3>
+          <input
+            type="text"
+            id="numInput"
+            placeholder="Enter number (int/float)"
+          />
+          <button onclick="findNextNumber()">Find Next Number</button>
+          <p id="nextResult"></p>
+        </div>
+
+        <!-- Task 4 -->
+        <div class="task-card" id="task4">
+          <h2>📝 Task 4: Capitalize Name</h2>
+          <input
+            type="text"
+            id="nameInput"
+            placeholder="Enter lowercase name"
+          />
+          <button onclick="capitalizeName()">Capitalize</button>
+          <p id="nameResult"></p>
+        </div>
+
+        <!-- Task 5 -->
+        <div class="task-card" id="task5">
+          <h2>⚖️ Task 5: BMI Calculator</h2>
+          <input
+            type="number"
+            id="weightInput"
+            placeholder="Enter weight (kg)"
+          />
+          <input
+            type="number"
+            id="heightInput"
+            placeholder="Enter height (m)"
+          />
+          <button onclick="calculateBMI()">Calculate</button>
+          <p id="bmiResult"></p>
+        </div>
+
+        <!-- Task 6 -->
+        <div class="task-card" id="task6">
+          <h2>Task 6: Random Array</h2>
+          <button onclick="generateArray()">Generate Random Array</button>
+          <p id="arrayDisplay"></p>
+          <button onclick="pickFirstLast()">Pick First & Last</button>
+          <p id="pickResult"></p>
+        </div>
+
+        <!-- Task 7 -->
+        <div class="task-card" id="task7">
+          <h2>➕ Task 7: Add Two Numbers</h2>
+          <input type="number" id="num1" placeholder="Enter first number" />
+          <input type="number" id="num2" placeholder="Enter second number" />
+          <input type="text" id="sumResult" placeholder="Result" readonly />
+        </div>
+      </div>
     </div>
-
-    <!-- Main Contents -->
-    <div class="main">
-      <!-- Task 1 -->
-      <div class="task-card" id="task1">
-        <h2>📅 Task 1: Age to Days Converter</h2>
-        <input type="number" id="ageInput" placeholder="Enter age in years">
-        <button onclick="convertAge()">Convert</button>
-        <p id="ageResult"></p>
-      </div>
-
-      <!-- Task 2: Hours -> Seconds -->
-<div class="task-card" id="task2">
-  <h2>⏰ Task 2: Hours → Seconds</h2>
-
-  <!-- Accepts decimal like 2.5, comma 2,5 or time "2:30" -->
-  <input type="text" id="hoursInput" placeholder="Enter hours (e.g. 2.5 or 2:30)">
-  <button id="hoursBtn">Convert</button>
-
-  <p id="hoursResult" class="result"></p>
-</div>
-
-   <!--task 3-->
-      <div class="task-card" id="task3">
-  <h2>Task 3: Find Next Number</h2>
-
-  <h3>Scenario 1: From User Array</h3>
-  <input type="text" id="userArray" placeholder="Enter numbers separated by commas (e.g. 5,10,15)">
-  <br><br>
-  <input type="number" id="arrayInput" placeholder="Enter a number from array">
-  <button onclick="findNextInUserArray()">Find Next in Array</button>
-  <p id="arrayResult"></p>
-
-  <h3>Scenario 2: Integer/Float</h3>
-  <input type="text" id="numInput" placeholder="Enter number (int/float)">
-  <button onclick="findNextNumber()">Find Next Number</button>
-  <p id="nextResult"></p>
-</div>
-
-
-      <!-- Task 4 -->
-      <div class="task-card" id="task4">
-        <h2>📝 Task 4: Capitalize Name</h2>
-        <input type="text" id="nameInput" placeholder="Enter lowercase name">
-        <button onclick="capitalizeName()">Capitalize</button>
-        <p id="nameResult"></p>
-      </div>
-
-      <!-- Task 5 -->
-      <div class="task-card" id="task5">
-        <h2>⚖️ Task 5: BMI Calculator</h2>
-        <input type="number" id="weightInput" placeholder="Enter weight (kg)">
-        <input type="number" id="heightInput" placeholder="Enter height (m)">
-        <button onclick="calculateBMI()">Calculate</button>
-        <p id="bmiResult"></p>
-      </div>
-
-      <!-- Task 6 -->
-     <div class="task-card" id="task6">
-  <h2>Task 6: Random Array</h2>
-  <button onclick="generateArray()">Generate Random Array</button>
-  <p id="arrayDisplay"></p>
-  <button onclick="pickFirstLast()">Pick First & Last</button>
-  <p id="pickResult"></p>
-</div>
-
-      <!-- Task 7 -->
-      <div class="task-card" id="task7">
-        <h2>➕ Task 7: Add Two Numbers</h2>
-        <input type="number" id="num1" placeholder="Enter first number">
-        <input type="number" id="num2" placeholder="Enter second number">
-        <input type="text" id="sumResult" placeholder="Result" readonly>
-      </div>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
