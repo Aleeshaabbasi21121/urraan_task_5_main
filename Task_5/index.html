@@ -31,29 +31,32 @@
         <p id="ageResult"></p>
       </div>
 
-      <!-- Task 2 -->
-      <div class="task-card" id="task2">
-        <h2>⏰ Task 2: Hours to Seconds Converter</h2>
-        <input type="number" id="hoursInput" placeholder="Enter hours">
-        <button onclick="convertHours()">Convert</button>
-        <p id="hoursResult"></p>
-      </div>
+      <!-- Task 2: Hours -> Seconds -->
+<div class="task-card" id="task2">
+  <h2>⏰ Task 2: Hours → Seconds</h2>
 
+  <!-- Accepts decimal like 2.5, comma 2,5 or time "2:30" -->
+  <input type="text" id="hoursInput" placeholder="Enter hours (e.g. 2.5 or 2:30)">
+  <button id="hoursBtn">Convert</button>
+
+  <p id="hoursResult" class="result"></p>
+</div>
+
+   <!--task 3-->
       <div class="task-card" id="task3">
   <h2>Task 3: Find Next Number</h2>
-  
-  <h3>Scenario 1: Next Number in Array</h3>
-  <p>Array = [5, 10, 15, 20, 25]</p>
-  <input type="number" id="arrayInput" placeholder="Enter number from array">
-  <button onclick="findNextInArray()">Find Next</button>
+
+  <h3>Scenario 1: From User Array</h3>
+  <input type="text" id="userArray" placeholder="Enter numbers separated by commas (e.g. 5,10,15)">
+  <br><br>
+  <input type="number" id="arrayInput" placeholder="Enter a number from array">
+  <button onclick="findNextInUserArray()">Find Next in Array</button>
   <p id="arrayResult"></p>
 
-  <hr>
-
-  <h3>Scenario 2: Next Number from Single Value</h3>
-  <input type="text" id="singleInput" placeholder="Enter integer or float">
-  <button onclick="findNextSingle()">Find Next</button>
-  <p id="singleResult"></p>
+  <h3>Scenario 2: Integer/Float</h3>
+  <input type="text" id="numInput" placeholder="Enter number (int/float)">
+  <button onclick="findNextNumber()">Find Next Number</button>
+  <p id="nextResult"></p>
 </div>
 
 

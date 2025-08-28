@@ -10,43 +10,91 @@ function convertAge() {
   let result = age * 365;
   document.getElementById("ageResult").innerText = `Age in days: ${result}`;
 }
+//task 2
+// Robust Hours -> Seconds converter
+document.getElementById("hoursBtn").addEventListener("click", convertHours);
+// allow Enter key in input
+document.getElementById("hoursInput").addEventListener("keydown", function(e){
+  if(e.key === "Enter") convertHours();
+});
 
-// Task 2: Hours to Seconds
 function convertHours() {
-  let hours = document.getElementById("hoursInput").value;
-  let result = hours * 3600;
-  document.getElementById("hoursResult").innerText = `Hours in seconds: ${result}`;
-}
+  const raw = document.getElementById("hoursInput").value.trim();
+  const out = document.getElementById("hoursResult");
 
-// Scenario 1: Next Number in Array
-function findNextInArray() {
-  let arr = [5, 10, 15, 20, 25];
-  let num = parseInt(document.getElementById("arrayInput").value);
-  let index = arr.indexOf(num);
-
-  if (index === -1) {
-    document.getElementById("arrayResult").innerText = "Number not found in array.";
-  } else if (index === arr.length - 1) {
-    document.getElementById("arrayResult").innerText = "No next number (last element).";
-  } else {
-    document.getElementById("arrayResult").innerText = "Next number is: " + arr[index + 1];
-  }
-}
-
-// Scenario 2: Single Value (Integer or Float)
-function findNextSingle() {
-  let input = document.getElementById("singleInput").value;
-  let num = Number(input);
-
-  if (isNaN(num)) {
-    document.getElementById("singleResult").innerText = "Please enter a valid number.";
+  if (!raw) {
+    out.style.color = "red";
+    out.innerText = "⚠️ Please enter hours (e.g. 2.5 or 2:30).";
     return;
   }
 
-  if (Number.isInteger(num)) {
-    document.getElementById("singleResult").innerText = "Next integer is: " + (num + 1);
+  // support "hh:mm" format
+  let hours;
+  if (raw.includes(":")) {
+    const parts = raw.split(":").map(s => s.trim());
+    if (parts.length !== 2) {
+      out.style.color = "red";
+      out.innerText = "⚠️ Invalid time format. Use H:MM (e.g. 2:30).";
+      return;
+    }
+    const hh = Number(parts[0]);
+    const mm = Number(parts[1]);
+    if (!Number.isFinite(hh) || !Number.isFinite(mm) || hh < 0 || mm < 0 || mm >= 60) {
+      out.style.color = "red";
+      out.innerText = "⚠️ Invalid hours or minutes.";
+      return;
+    }
+    hours = hh + mm / 60;
   } else {
-    document.getElementById("singleResult").innerText = "Next float is: " + (num + 0.1).toFixed(1);
+    // accept comma or dot decimal separators
+    const normalized = raw.replace(",", ".");
+    hours = Number(normalized);
+    if (!Number.isFinite(hours)) {
+      out.style.color = "red";
+      out.innerText = "⚠️ Invalid number. Enter numeric hours (e.g. 2.5).";
+      return;
+    }
+    if (hours < 0) {
+      out.style.color = "red";
+      out.innerText = "⚠️ Please enter a non-negative value.";
+      return;
+    }
+  }
+
+  // compute seconds
+  const seconds = hours * 3600;
+  // nice formatting: show hours with up to 2 decimals, seconds integer if whole else 2 decimals
+  const hoursDisplay = Number.isInteger(hours) ? hours : Number(hours.toFixed(2));
+  const secondsDisplay = Number.isInteger(seconds) ? seconds : Number(seconds.toFixed(2));
+
+  out.style.color = "green";
+  out.innerText = `${hoursDisplay} hour(s) = ${secondsDisplay} second(s)`;
+}
+
+//task 3
+// Scenario 1: User provides array
+function findNextInUserArray() {
+  let userArray = document.getElementById("userArray").value.split(",").map(Number);
+  let num = parseInt(document.getElementById("arrayInput").value);
+  let index = userArray.indexOf(num);
+
+  if (index === -1) {
+    document.getElementById("arrayResult").innerText = "Number not found in array!";
+  } else if (index === userArray.length - 1) {
+    document.getElementById("arrayResult").innerText = "This is the last number, no next element.";
+  } else {
+    document.getElementById("arrayResult").innerText = "Next number in array: " + userArray[index + 1];
+  }
+}
+
+// Scenario 2: Integer or Float next number
+function findNextNumber() {
+  let num = document.getElementById("numInput").value;
+
+  if (num.includes(".")) {
+    document.getElementById("nextResult").innerText = "Next number: " + (parseFloat(num) + 0.1).toFixed(1);
+  } else {
+    document.getElementById("nextResult").innerText = "Next number: " + (parseInt(num) + 1);
   }
 }
 
